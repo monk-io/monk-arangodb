@@ -1,0 +1,2 @@
+REPO arangodb
+LOAD arangodb.yml

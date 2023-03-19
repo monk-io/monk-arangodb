@@ -1,0 +1,39 @@
+namespace: arangodb
+
+db:
+  metadata:
+    defines: metadata
+    name: ArangoDB
+    description: Highly available and scalable database to natively work with graphs, documents and fulltext search with one engine & query language
+    website: https://www.arangodb.com/
+    publisher: monk.io
+    icon: https://www.arangodb.com/wp-content/themes/cleanlab/images/logo_main.png
+  defines: runnable
+  variables:
+    root_password:
+      env: ARANGO_ROOT_PASSWORD
+      type: string
+      value: monk
+    db_port:
+      type: int
+      value: 8529
+    image:
+      type: string
+      value: latest
+    volume_local:
+      type: string
+      value: <- `${monk-volume-path}/arongodb`
+  containers:
+    db:
+      image: arangodb
+      image-tag: <- `${image}`
+      ports:
+        - <- `${db_port}:8529`
+      paths:
+        - <- `${volume_local}/data:/var/lib/arangodb3`
+  services:
+    db:
+      port: 8529
+      container: db
+      protocol: tcp
+      host-port: <- `${db_port}`
