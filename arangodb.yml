@@ -25,6 +25,7 @@ base:
       - <- `${monk-volume-path}/arongodb/data:/var/lib/arangodb3`
 db:
   defines: runnable
+  inherits: arangodb/base
   variables:
     root_password:
       env: ARANGO_ROOT_PASSWORD
