@@ -33,6 +33,8 @@ db:
     db:
       image: arangodb
       image-tag: <- `${image}`
+      ports:
+        - <- `${db_port}:8529`
       paths:
         - <- `${monk-volume-path}/arongodb/data:/var/lib/arangodb3`
   services:

@@ -52,7 +52,6 @@ foo@bar:~$ monk run arangodb/db
 |---------------|----------------------|------------------------------|
 | db_port       | Arango database port | 7687                         |
 | image         | Docker image tag     | latest                       |
-| volume_local  | Volume path          | ${monk-volume-path}/arangodb |
 | root_password | Root password        | monk                         |
 
 ## Stop, remove and clean up workloads and templates
