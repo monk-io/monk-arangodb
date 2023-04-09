@@ -37,10 +37,6 @@ db:
     image:
       type: string
       value: latest
-  containers:
-    db:
-      ports:
-        - <- `${db_port}:8529`
   services:
     db:
       port: 8529
