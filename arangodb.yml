@@ -1,6 +1,6 @@
 ---
 namespace: arangodb
-db:
+base:
   metadata:
     defines: metadata
     name: ArangoDB
@@ -12,11 +12,18 @@ db:
       One of the key features of ArangoDB is its ability to seamlessly combine and query data across multiple models. This allows for greater flexibility and efficiency in handling complex data structures. ArangoDB also provides built-in support for sharding and replication, making it highly scalable and fault-tolerant.
 
       ArangoDB provides a query language called AQL (ArangoDB Query Language), which supports SQL-like syntax as well as graph traversal and document manipulation. It also includes a web-based interface, called ArangoDB Web UI, which makes it easy to manage databases, execute queries, and monitor performance.
-
+      
       Overall, ArangoDB is a powerful and flexible database management system that can handle a variety of data models and use cases. It is used in a wide range of applications, including e-commerce, social networking, and content management systems.
     website: https://www.arangodb.com/
     publisher: monk.io
     icon: https://www.arangodb.com/wp-content/themes/cleanlab/images/logo_main.png
+  containers:
+    db:
+      image: arangodb
+      image-tag: <- `${image}`
+    paths:
+      - <- `${monk-volume-path}/arongodb/data:/var/lib/arangodb3`
+db:
   defines: runnable
   variables:
     root_password:
@@ -31,12 +38,8 @@ db:
       value: latest
   containers:
     db:
-      image: arangodb
-      image-tag: <- `${image}`
       ports:
         - <- `${db_port}:8529`
-      paths:
-        - <- `${monk-volume-path}/arongodb/data:/var/lib/arangodb3`
   services:
     db:
       port: 8529
