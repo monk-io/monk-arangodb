@@ -1,10 +1,19 @@
+---
 namespace: arangodb
-
 db:
   metadata:
     defines: metadata
     name: ArangoDB
-    description: Highly available and scalable database to natively work with graphs, documents and fulltext search with one engine & query language
+    description: |
+      ArangoDB is a multi-model, open-source database management system that supports three data models: document, graph, and key-value. It is designed to be a flexible and scalable solution that can handle a variety of use cases, from simple document storage to complex graph analytics.
+
+      In the document model, ArangoDB stores data as JSON documents, similar to other document-oriented databases such as MongoDB. In the graph model, data is represented as nodes and edges, similar to Neo4j and OrientDB. In the key-value model, data is stored as simple key-value pairs.
+
+      One of the key features of ArangoDB is its ability to seamlessly combine and query data across multiple models. This allows for greater flexibility and efficiency in handling complex data structures. ArangoDB also provides built-in support for sharding and replication, making it highly scalable and fault-tolerant.
+
+      ArangoDB provides a query language called AQL (ArangoDB Query Language), which supports SQL-like syntax as well as graph traversal and document manipulation. It also includes a web-based interface, called ArangoDB Web UI, which makes it easy to manage databases, execute queries, and monitor performance.
+
+      Overall, ArangoDB is a powerful and flexible database management system that can handle a variety of data models and use cases. It is used in a wide range of applications, including e-commerce, social networking, and content management systems.
     website: https://www.arangodb.com/
     publisher: monk.io
     icon: https://www.arangodb.com/wp-content/themes/cleanlab/images/logo_main.png
@@ -20,17 +29,12 @@ db:
     image:
       type: string
       value: latest
-    volume_local:
-      type: string
-      value: <- `${monk-volume-path}/arongodb`
   containers:
     db:
       image: arangodb
       image-tag: <- `${image}`
-      ports:
-        - <- `${db_port}:8529`
       paths:
-        - <- `${volume_local}/data:/var/lib/arangodb3`
+        - <- `${monk-volume-path}/arongodb/data:/var/lib/arangodb3`
   services:
     db:
       port: 8529
