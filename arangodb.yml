@@ -45,4 +45,3 @@ db:
       port: 8529
       container: db
       protocol: tcp
-      host-port: <- `${db_port}`
